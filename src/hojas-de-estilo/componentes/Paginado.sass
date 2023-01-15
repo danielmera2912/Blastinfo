@@ -1,0 +1,16 @@
+@import '../main'
+// se establece propiedades al páginado que tendrá en común todos los listados de la web, empieza con un contenedor
+.cuerpo__paginado
+    display : flex
+    justify-content : center
+    // se define cambios en sus características según la resolución de la pantalla
+    @media (max-width: 1400px)
+        margin-top : 2.5rem
+    @media (max-width: 1100px)
+        margin-bottom : 1rem
+    // se establece el valor de los botones, que se heredará de lo que está definido en el archivo extends.
+    &__boton
+        @extend %boton
+// se establece propiedades al botón que es el que está siendo activo mostrando su contenido
+.cuerpo__paginado__boton--desactivado
+    opacity : 25%

@@ -1,0 +1,52 @@
+@import '../main'
+// se define cambios en sus características según la resolución de la pantalla
+.cuerpo--listado
+    @media (max-width: 1100px)
+        height : 100% !important
+// Se añade propiedades al listado de los Pokémon
+.cuerpo
+    @media (max-width: 1100px)
+        height: 100%
+.cuerpo__listado 
+    padding : 1rem
+    justify-content : center
+    align-items : center
+    display : grid
+    grid-template-columns : repeat(4, 1fr)
+    grid-template-rows : repeat(2, 1fr)
+    grid-gap : 10px
+    width : 100vw
+    height : 60vh
+     // se define cambios en sus características según la resolución de la pantalla
+    @media (max-width: 1400px)
+        grid-template-columns : repeat(3, 1fr)
+    @media (max-width: 1100px)
+        grid-template-columns : repeat(2, 1fr)
+        height: 100%
+    @media (max-width: 780px)
+        grid-template-columns : repeat(1, 1fr)
+    // se define características en común de cada objeto de la lista 
+    &__items
+        display : flex
+        flex-direction: column
+        // se establece propiedades a la caja que contiene las dos sprites (frente y espalda)
+        &__imagenes
+            align-self : center
+            display: flex
+             // se establece propiedades a cada sprite
+            &__imagen
+                padding : 1.5rem
+                background-color : $color_secundario_claro
+                border : 1px solid $color_oscuro
+                 // se define cambios en sus características según la resolución de la pantalla
+                @media (max-width: 1700px)
+                    padding: 0.5rem
+                @media (max-width: 1200px)
+                    padding: 0.2rem
+        // se establece las propiedades que tendrá el texto que representa el nombre el Pokémon
+        &__texto
+            width : 100%
+            text-align: center
+            font-size : $s
+            font-family : $fuente_inter
+            color : $color_oscuro

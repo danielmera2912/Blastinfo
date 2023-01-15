@@ -1,0 +1,105 @@
+@import '../main'
+// se establece valores para el cuerpo que tiene la página de ERROR 404
+.cuerpo--error
+    display : flex
+    text-align : center
+    justify-content : center
+    align-items : center
+    color : $color_oscuro
+    font-size : $s
+    font-family : $fuente_inter
+    //height : 100%
+    flex-direction : column
+    // se establece los valores para el título de la página
+    &__titulo
+        grid-column-start: 1
+        grid-column-end: 3
+        grid-row-start: 1
+        grid-row-end: 2
+        font-family: $fuente_inter
+        font-size : $xl
+        color : $color_primario
+        padding : 1rem
+    
+    // se establece los valores del contenedor que contiene el mensaje de error 404
+    &__contenedor 
+        background-color: $color_secundario_claro
+        margin: auto
+        height: 800px
+        width: 40%
+        position: relative
+        // se define cambios en sus características según la resolución de la pantalla
+        @media (max-width: 800px)
+            width: 80%
+        // se establece los valores que tendrá el texto "4" que empieza a formar "404", haciendo referencia al error 404
+        &__text1 
+            color: $color_claro
+            font-family: 'Nunito Sans', sans-serif
+            font-size: 11rem
+            position: absolute
+            left: 20%
+            top: 8%
+            // se define cambios en sus características según la resolución de la pantalla
+            @media (max-width: 1200px)
+                top: 18%
+                left: 20%
+                font-size: 9rem
+            @media (max-width: 800px)
+                top: 18%
+                left: 30%
+                font-size: $xl
+        // se establece los valores que tendrá el texto "4" que termina de formar "404", haciendo referencia al error 404
+        &__text2 
+            color: #ffffff
+            font-family: 'Nunito Sans', sans-serif
+            font-size: 11rem
+            position: absolute
+            left: 68%
+            top: 8%
+            // se define cambios en sus características según la resolución de la pantalla
+            @media (max-width: 1200px)
+                top: 18%
+                left: 70%
+                font-size: 9rem
+            @media (max-width: 800px)
+                top: 18%
+                left: 70%
+                font-size: $xl
+        // establece los valores de la imágen de la pokeball, que simula el "0" para formar "404", haciendo referencia al error 404
+        &__img
+            position : absolute
+            font-size: 10rem
+            width : 8rem
+            left: 42%
+            top: 15%
+            color: $color_claro
+            animation : rotate 5s linear infinite
+            // se define cambios en sus características según la resolución de la pantalla
+            @media (max-width: 1200px)
+                top: 25%
+                width : 6rem
+                // left: 43%
+                // top: 18%
+            @media (max-width: 800px)
+                width : 4rem
+                left: 43%
+                top: 18%
+
+        // se establece las propiedades que tendrá el mensaje que aparece en el contenedor, informando del error
+        &__mensaje
+            text-align: center
+            font-family: 'Nunito Sans', sans-serif
+            font-size: 1.6rem
+            position: absolute
+            left: 16%
+            top: 45%
+            width: 75%
+
+// se establece la animación de la imágen de la Pokeball, 
+// provocando un giro de 360 grados y termine volviendo a la normalidad de fforma constante
+@keyframes rotate 
+  from 
+    transform: rotate(0deg)
+
+  to 
+    transform: rotate(360deg)

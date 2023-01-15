@@ -1,0 +1,56 @@
+@import '../main'
+// Se añade propiedades al listado de movimientos
+.cuerpo__listado--movimiento
+    align-items : stretch
+    // se define características en común de cada objeto de la lista
+    &__items
+        background-color : $color_secundario_claro
+        color : $color_claro
+        font-family: $fuente_inter
+        font-size : $l
+        display : flex
+        flex-direction : row
+        border-radius : 5px
+        border : 1px solid $color_oscuro
+        padding : 1rem
+        height : 12rem
+        align-items : center
+        justify-content : center
+        width : 100%
+        // se define cambios en sus características según la resolución de la pantalla
+        @media (max-width: 1900px)
+            padding: 0.25rem
+        @media (max-width: 760px)
+            font-size : $s  
+        @media (max-width: 425px)
+            width : 22rem
+        // se establece propiedades al nombre de cada objeto que representa un movimiento
+        &__nombre
+            width : 78%
+            text-align : center
+            padding : 3rem
+            // se define cambios en sus características según la resolución de la pantalla
+            @media (max-width: 1900px)
+                padding: 1.5rem
+            
+        // se establece propiedades a los datos adiccionales de cada movimiento
+        &__datos    
+            width : 15%
+            display : flex
+            flex-direction : column
+            justify-content : center
+            align-items : center
+            padding : 2.5rem
+            // se define cambios en sus características según la resolución de la pantalla
+            @media (max-width: 1900px) 
+                padding: 2rem
+            // se establece propiedades a la imágen que aparece de los datos de los movimientos, en este caso es la generación
+            &__generacion
+                width : 3.25rem
+            // se establece propiedades a la imágen que aparece de los datos de los movimientos, en este caso es la característica del movimiento
+            &__movimiento
+                margin : 0.1rem
+                width : 3.25rem
+            // se establece propiedades a la imágen que aparece de los datos de los movimientos, en este caso es el tipo
+            &__tipo
+                width : 4rem

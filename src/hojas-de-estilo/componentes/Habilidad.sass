@@ -1,0 +1,61 @@
+@import '../main'
+// Se añade propiedades a la habilidad
+.cuerpo--articulo--habilidad
+    display : flex
+    text-align : center
+    justify-content : center
+    align-items : center
+    color : $color_oscuro
+    font-size : $s
+    font-family : $fuente_inter
+
+    flex-direction : column
+    // se añade propiedades al título de la página de la habilidad
+    &__titulo
+        grid-column-start: 1
+        grid-column-end: 3
+        grid-row-start: 1
+        grid-row-end: 2
+        font-family: $fuente_inter
+        font-size : $xl
+        color : $color_primario
+        padding : 1rem
+    // se añade propiedades a la información que tendrá la habilidad, englobada en un contenedor
+    &__informacion
+        background-color : $color_secundario_claro
+        min-height : 70%
+        max-height : 95%
+        margin : 1rem  
+        border : 1px solid $color_oscuro
+        display : flex
+        flex-direction : column
+        // se define cambios en sus características según la resolución de la pantalla
+        @media (max-width: 1400px)
+            margin : 0.5rem
+        
+        // se establece propiedades al título de la información de la habilidad
+        &__titulo
+            font-size : $l
+            color : $color_primario
+            font-family: $fuente_inter
+            border-bottom : 1px solid $color_oscuro
+            width : 100%
+            padding : 2rem
+            // se define cambios en sus características según la resolución de la pantalla
+            @media (max-width: 1400px)
+                padding-bottom : 0.5rem
+        // se establece propiedades a los datos que tendrá la habilidad
+        &__datos
+            // se establece propiedades a la imágen que representa a la generación de la habilidad
+            &__generacion
+                padding-top : 1rem
+                width : 3.25rem
+        // se establece propiedades a la descripción de la habilidad
+        &__descripcion
+            padding : 1rem
+            display : flex
+            justify-content : center
+            align-items : center
+            // se define cambios en sus características según la resolución de la pantalla
+            @media (max-width: 500px)
+                font-size : $xs

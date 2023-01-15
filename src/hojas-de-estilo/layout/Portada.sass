@@ -1,0 +1,40 @@
+@import '../main'
+// se establece un fondo para el inicio
+.cuerpo--fondo
+    background : url("../../images/fondo3.png")
+    background-repeat : no-repeat
+    background-size : 100% 100% 
+// se establecen valores básicos para el inicio
+.cuerpo
+    height : 84vh
+    // se establecen los valores del logo del inicio
+    &__logo
+        width: 10rem
+        display : block
+        margin : auto
+        padding-top: 2.5rem
+    // se establecen valores al título principal del inicio
+    &__titulo
+        display : block
+        color : $color_primario
+        font-size : $xxl
+        font-family : $fuente_oswald
+        display : block
+        text-align : center
+    // se establecen valores al subtítulo principal del inicio
+    &__subtitulo
+        display : block
+        text-align : center
+        color : $color_secundario_oscuro
+        font-size : $xl
+        font-family : $fuente_oswald
+        font-weight : normal
+    
+    // se define cambios en sus características según la resolución de la pantalla
+    
+    @media (max-width: 720px)
+        &__titulo
+            font-size : $xl
+        &__subtitulo
+            font-size : $l
+    

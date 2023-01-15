@@ -1,0 +1,60 @@
+@import '../main'
+// Se añade las propiedades de cómo se visualizará la página de contacto
+.cuerpo--contacto
+    display: flex
+    justify-content : center
+    align-items : center
+    padding : 1rem
+    flex-direction : column
+    width : 100%
+    background : url("../../images/fondo3.png")
+    background-repeat : no-repeat
+    background-size : 100% 100% 
+    // se establece propiedades al título de la página del contacto
+    &__titulo
+        font-family: $fuente_inter
+        font-size : $xl
+        color : $color_primario
+        padding : 5rem
+    // se establece propiedades a los datos del formulario de contacto
+    &__datos
+        margin-bottom : 1rem
+        width : 80%
+        // se establece las propiedades que tendrá el campo nombre del formulario de contacto
+        &__nombre
+            height : 4rem
+            width : 39%
+            padding : 1rem
+        // se establece las propiedades que tendrá el campo correo del formulario de contacto
+        &__correo
+            height : 4rem
+            width: 60%
+            padding : 1rem
+        // se establece las propiedades que tendrá el campo descripción del formulario de contacto
+        &__descripcion
+            margin-top : 1rem
+            width : 99.3%
+            height : 15rem
+            padding : 1rem
+    // se establece las propiedades que tendrá el botón para enviar los datos del formulario de contacto    
+    &__enviar
+        @extend %boton
+        width : 10rem
+        max-height : 2rem
+        border : 1px solid $color_oscuro
+        border-radius : 5px
+        margin : auto
+
+    // se define cambios en sus características según la resolución de la pantalla
+    @media (max-width: 1200px)
+        &__titulo
+            font-size : $l
+            padding: 2rem
+        &__datos
+            &__nombre
+                width : 99%
+                margin-bottom : 1rem
+            &__correo
+                width: 99%
+        &__enviar
+            margin-bottom : 2rem
