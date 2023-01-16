@@ -1,7 +1,7 @@
 @import '../main'
 // Estilos para el cuadro desplegable que te permite registrar una cuenta.
 .registrar
-    height : 600px
+    height : 658px
     width : 500px
     background-color : $color_claro
     position : absolute
@@ -41,6 +41,12 @@
             height: 4rem
             padding-left : 1em
             font-size : $xs
+        &__informativo1
+            display : none
+        &__informativo1--visible
+            display : flex
+            color : red
+            font-size : $xs
     // Se define el botón que te redirigirá a la página de iniciar sesión, una vez que se ha registrado la cuenta.
     &__boton
         display : flex
@@ -57,6 +63,8 @@
             font-size : $xs
             font-family : $fuente_inter
             cursor : pointer
+            border : 1px solid $color_oscuro
+            padding-top: 10px
 // Se define las características del fondo que poseerá el desplegable, que será transparente con opacidad para no
 // darle importancia a los elementos del fondo y también que te permite que al pulsar, cierras el desplegable.
 .fondo

@@ -34,6 +34,14 @@
         flex-direction : column
         justify-content : center
         align-items : center
+        &__recordar
+            font-size : $xs
+        &__informativo1
+            display : none
+        &__informativo1--visible
+            display : flex
+            color : red
+            font-size : $xs
         // Se define las propiedades de los inputs del desplegable.
         &__elemento
             margin : 2rem
@@ -47,9 +55,12 @@
         flex-direction : column
         justify-content : center
         align-items : center
+        
         // Se define el texto que posee el botón.
         &__opcion
             background-color : $color_primario
+            border : 1px solid $color_oscuro
+            padding: 10px
             height : 2.8rem
             width : 8rem
             border-radius : 5px

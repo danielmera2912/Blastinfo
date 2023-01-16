@@ -118,9 +118,17 @@ let hayContenido;
     )}) 
     }
 
-    {
-      identidad=="pokemon" && hayContenido==false && <Nada_encontrado/> 
-    }
+        {
+        identidad=="pokemon" && buscar.length<1 && filtro=="id_descendente" && pokemons != null && pokemons.results.length > 0 && [...pokemons.results].splice((paginaActual-1)*8,8).map(item => {
+          return( 
+            <Caja_habilidad key={item.name} name={item.name}/>
+        )}) 
+      }
+      {
+        identidad=="pokemon" && hayContenido==false && buscar.length>=1 && <Nada_encontrado/> 
+      }
+
+
 
 
     </section>

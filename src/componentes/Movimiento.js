@@ -20,6 +20,11 @@ import rock from "../images/Tipos/rock.png";
 import steel from "../images/Tipos/steel.png";
 import water from "../images/Tipos/water.png";
 
+
+import fisico from "../images/Movimientos/Tipo_fisico.gif";
+import especial from "../images/Movimientos/Tipo_especial.gif";
+import estado from "../images/Movimientos/Tipo_estado.gif";
+
 function Movimiento() {
     const location = useLocation()
     const { name } = location.state;
@@ -28,14 +33,14 @@ function Movimiento() {
         nombre_nuevo = nombre_nuevo.charAt(0).toUpperCase() + nombre_nuevo.slice(1);
     }
     const url = "https://pokeapi.co/api/v2/move/"+name;
-    const [habilidad, setHabilidad] = useState(null)
+    const [movimiento, setMovimiento] = useState(null)
     useEffect(() => {
         obtenerDatos();
       }, [])
     const obtenerDatos =  async () => {
       const data = await fetch(url);
-      const habilidad= await data.json();
-      setHabilidad(habilidad);
+      const movimiento= await data.json();
+      setMovimiento(movimiento);
       
     }
 
@@ -45,21 +50,88 @@ function Movimiento() {
    
   return (
     
-    <main class="cuerpo cuerpo--articulo--movimiento">
-            <section class="cuerpo--articulo--movimiento__titulo">
+    <main className="cuerpo cuerpo--articulo--movimiento">
+            <section className="cuerpo--articulo--movimiento__titulo">
                 {nombre_nuevo}
             </section>
-            {/* flavor_text_entries.flavor_text */}
-            <section class="cuerpo--articulo--movimiento__informacion">
-                <header class="cuerpo--articulo--movimiento__informacion__titulo">Descripción</header>
-                <content class="cuerpo--articulo--movimiento__informacion__datos">
-                    <img class="cuerpo--articulo--movimiento__informacion__datos__generacion" src="assets/images/Generaciones/primera_generacion.png"/>
-                    <img class="cuerpo--articulo--movimiento__informacion__datos__movimiento" src="assets/images/Movimientos/Tipo_especial.gif"/>
-                    <img class="cuerpo--articulo--movimiento__informacion__datos__tipo" src="assets/images/Tipos/Normal_Pokemon.svg"/>
+            <section className="cuerpo--articulo--movimiento__informacion">
+                <header className="cuerpo--articulo--movimiento__informacion__titulo">Descripciones</header>
+                <content className="cuerpo--articulo--movimiento__informacion__datos">
+                      {
+                        movimiento!=null && movimiento.type.name=="bug" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={bug}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="dark" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={dark}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="dragon" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={dragon}/>
+                      }
+                      {
+                         movimiento!=null && movimiento.type.name=="electric" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={electric}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="fairy" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={fairy}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="fighting" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={fighting}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="fire" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={fire}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="flying" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={flying}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="ghost" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={ghost}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="grass" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={grass}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="ground" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={ground}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="ice" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={ice}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="normal" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={normal}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="poison" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={poison}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="psychic" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={psychic}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="rock" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={rock}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="steel" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={steel}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.type.name=="water" && <img className="cuerpo--articulo--movimiento__informacion__datos__generacion" src={water}/>
+                      }
+
+
+                      {
+                        movimiento!=null && movimiento.damage_class.name=="physical" && <img className="cuerpo--articulo--movimiento__informacion__datos__movimiento" src={fisico}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.damage_class.name=="special" && <img className="cuerpo--articulo--movimiento__informacion__datos__movimiento" src={especial}/>
+                      }
+                      {
+                        movimiento!=null &&  movimiento.damage_class.name=="status" && <img className="cuerpo--articulo--movimiento__informacion__datos__movimiento" src={estado}/>
+                      }
+
+
                 </content>
-                <content class="cuerpo--articulo--movimiento__informacion__descripcion">El usuario copia la especie, el peso, el tipo, la habilidad, las estadísticas calculadas (excepto HP) y los movimientos del objetivo. Todos los movimientos copiados tendrán 5 PP restantes. Los IV se copian con el propósito de poder oculto, pero las estadísticas no se vuelven a calcular.
-                    La banda de elección, la bufanda de elección y las especificaciones de elección permanecen vigentes y el usuario debe seleccionar un nuevo movimiento.
-                    Este movimiento no puede ser copiado por un movimiento de espejo, ni forzado por un bis.</content>
+                {
+                  movimiento!=null && [...movimiento.flavor_text_entries].map(item => {
+                    return( 
+                      item.language.name=="es" && <content className="cuerpo--articulo--movimiento__informacion__descripcion">- {item.flavor_text}</content> 
+                  )}) 
+                }
+
             </section>
         
     </main>

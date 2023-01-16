@@ -9,16 +9,16 @@ function Pie({  }) {
     const [activado, setActivado] = useState(false);
     const [activado2, setActivado2] = useState(false);
     const [activado3, setActivado3] = useState(false);
-
-    const [sesionIniciada, setSesionIniciada] = useState(false);
+    const [sesionIniciada, setSesionIniciada] = useState(localStorage.getItem("conexion"));
 
     const mostrarSesion = () => {
-        if(sesionIniciada === false){
+        setSesionIniciada(localStorage.getItem("conexion"))
+        if(localStorage.getItem("conexion") == "true"){
+            setActivado3(true);
+        }else{
             setActivado(true);
         }
-        else{
-            setActivado3(true);
-        }
+
       }
     const usarZoom = (valor) => {
         setZoom(valor);

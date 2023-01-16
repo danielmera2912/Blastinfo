@@ -82,8 +82,14 @@ const Listado_pokemon = () => {
             <Caja_pokemon key={item.name} name={item.name} front={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+item.url.split('/')[item.url.split('/').length-2]+".png"} back={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/"+item.url.split('/')[item.url.split('/').length-2]+".png"}/>
         )}) 
       }
+       {
+        identidad=="pokemon" && buscar.length<1 && filtro=="id_descendente" && pokemons != null && pokemons.results.length > 0 && [...pokemons.results].splice((paginaActual-1)*8,8).map(item => {
+          return( 
+            <Caja_pokemon key={item.name} name={item.name} front={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+item.url.split('/')[item.url.split('/').length-2]+".png"} back={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/"+item.url.split('/')[item.url.split('/').length-2]+".png"}/>
+        )}) 
+      }
       {
-        identidad=="pokemon" && hayContenido==false && <Nada_encontrado/> 
+        identidad=="pokemon" && hayContenido==false && buscar.length>=1 && <Nada_encontrado/> 
       }
     
       {

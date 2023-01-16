@@ -18,7 +18,6 @@ function Encabezado({paginaActual }) {
   
   return (
     
-    // <header className={portada ? 'encabezado encabezado--normal' : 'encabezado encabezado--portada'}>
     <header className={portada ? 'encabezado encabezado--normal' : 'encabezado encabezado--portada'}>
       {portada==true && 
         <a href="/">
