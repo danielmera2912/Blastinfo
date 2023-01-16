@@ -29,19 +29,19 @@ function Pie({  }) {
             <li>
                 <a className="pie__seccion__redes" href="error404">
                     <img onMouseEnter={() => usarZoom(true)}
-                            onMouseLeave={() => usarZoom(false)} src={Twitter} className={zoom ? 'pie__seccion__redes' : 'pie__seccion__redes-img_encima'} alt='Logo de Twitter'/>
+                            onMouseLeave={() => usarZoom(false)} src={Twitter} className={zoom ? 'pie__seccion__redes-img_encima' : 'pie__seccion__redes'} alt='Logo de Twitter'/>
                 </a>
             </li>
             <li>
                 <a className="pie__seccion__redes" href="error404">
                     <img onMouseEnter={() => usarZoom(true)}
-                            onMouseLeave={() => usarZoom(false)} src={Facebook} className={zoom ? 'pie__seccion__redes' : 'pie__seccion__redes-img_encima'} alt='Logo de Facebook'/>
+                            onMouseLeave={() => usarZoom(false)} src={Facebook} className={zoom ? 'pie__seccion__redes-img_encima' : 'pie__seccion__redes'} alt='Logo de Facebook'/>
                 </a>
             </li>
             <li>
                 <a className="pie__seccion__redes" href="error404">
                     <img onMouseEnter={() => usarZoom(true)}
-                            onMouseLeave={() => usarZoom(false)} src={Instagram} className={zoom ? 'pie__seccion__redes' : 'pie__seccion__redes-img_encima'} alt='Logo de Instagram'/>
+                            onMouseLeave={() => usarZoom(false)} src={Instagram} className={zoom ? 'pie__seccion__redes-img_encima' : 'pie__seccion__redes'} alt='Logo de Instagram'/>
                 </a>
             </li>
         </ul>
