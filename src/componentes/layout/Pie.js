@@ -4,13 +4,42 @@ import Twitter from '../../images/Redes/twitter-5-48.png';
 import Facebook from '../../images/Redes/facebook-5-48.png';
 import Instagram from '../../images/Redes/instagram-48.png';
 import Iniciar from '../sesion/Iniciar';
-function Pie({  }) {
-    const [zoom, setZoom] = useState(false);
-    const [activado, setActivado] = useState(false);
-    const [activado2, setActivado2] = useState(false);
-    const [activado3, setActivado3] = useState(false);
-    const [sesionIniciada, setSesionIniciada] = useState(localStorage.getItem("conexion"));
 
+/**
+ * Componente que representa el pie de la página web
+ *
+ * @component
+ * @example
+ * 
+ * return (
+ *   <Pie/>
+ * )
+ */
+
+function Pie({  }) {
+    /**
+    * Zoom RRSS
+    */
+    const [zoom, setZoom] = useState(false);
+    /**
+    * Abrir iniciar sesión
+    */
+    const [activado, setActivado] = useState(false);
+    /**
+    * Abrir registrar sesión
+    */
+    const [activado2, setActivado2] = useState(false);
+    /**
+    * Abrir perfil
+    */
+    const [activado3, setActivado3] = useState(false);
+    /**
+    * Recordar la sesión iniciada
+    */
+    const [sesionIniciada, setSesionIniciada] = useState(localStorage.getItem("conexion"));
+    /**
+     * retorna una ventana de inicio de sesión o perfil según si tiene la sesión iniciada o no
+     */
     const mostrarSesion = () => {
         setSesionIniciada(localStorage.getItem("conexion"))
         if(localStorage.getItem("conexion") == "true"){
@@ -20,6 +49,10 @@ function Pie({  }) {
         }
 
       }
+     /**
+     * cambia el valor del Zoom para cambiar la visión de las RRSS
+     * @param   {boolean} valor  se mandará un boolean para cambiar el estado
+     */
     const usarZoom = (valor) => {
         setZoom(valor);
     }

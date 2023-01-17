@@ -2,8 +2,20 @@ import React, {useState, useEffect} from 'react';
 import '../hojas-de-estilo/layout/Portada.sass';
 import Logo from '../images/logo.svg';
 import Barra_buscadora from './Barra_buscadora';
+/**
+ * Componente que representa la portada
+ *
+ * @component
+ * @example
+ * return (
+ *   <Inicio/>
+ * )
+ */
 function Inicio({  }) {
   const [efectoActivado, setEfectoActivado] = useState(false)
+   /**
+   * función que al ser llamado provoca un efecto
+   */
   const efecto = () => {
     setEfectoActivado(true)
   }

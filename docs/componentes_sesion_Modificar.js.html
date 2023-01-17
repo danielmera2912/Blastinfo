@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: componentes/sesion/Modificar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: componentes/sesion/Modificar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState, useEffect} from 'react';
+import '../../hojas-de-estilo/sesion/Registrar.sass';
+import Cerrar from "../../images/icons/cerrar.svg";
+/**
+ * Componente que representa modificar perfil del perfil
+ *
+ * @component
+ * @example
+ * const props.abierto = true
+ * const props.setAbierto(false) = function => props.abierto=false 
+ * const props.nombreUser = "Juan"
+ * const props.correoUser = "juan@gmail.com"
+ * const props.fechaUser = "2010-10-10"
+ * const props.descripcionUser = "me gusta pokemon"
+ * return (
+ *   &lt;Modificar nombreUser={nombreUser} correoUser={correoUser} fechaUser={fechaUser} descripcionUser={descripcionUser} />
+ * )
+ */
+
+function Modificar(props) {
+  /**
+  * Expresión Regular del nombre del Usuario
+  */
+  const expresionUsuario = /^[a-zA-Z]+$/
+  /**
+  * Expresión Regular de la contraseña Usuario
+  */
+  const expresionPass = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
+  /**
+  * Expresión Regular del correo del Usuario
+  */
+  const expresionCorreo = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
+  /**
+  * Expresión Regular de la descripción del Usuario
+  */
+  const expresionDescripcion = /^[\s\S]{1,300}$/
+  const [errorRegistro, setErrorRegistro] = useState(null)
+  const [validacionRegistro, setValidacionRegistro] = useState(true)
+  const [textCorreo, setTextCorreo] = useState(props.correoUser)
+  const [textFecha, setTextFecha] = useState(props.fechaUser)
+  const [textDescripcion, setTextDescripcion] = useState(props.descripcionUser)
+  const [textUserRegistro, setTextUserRegistro] = useState(props.nombreUser)
+  const [textPassRegistro, setTextPassRegistro] = useState("Ee98499304")
+
+  /**
+   * establece un cambio de texto para el correo del Usuario
+   * @param   {string} e  nuevo correo para el Usuario
+   */
+  const cambiarTextoCorreo = (e) => {
+    setTextCorreo(e.target.value);
+  }
+  /**
+   * establece un cambio de texto para el nombre del Usuario en el registro
+   * @param   {string} e  nuevo nombre para el Usuario en el registro
+   */
+  const cambiarTextoUsuarioRegistro = (e) => {
+    setTextUserRegistro(e.target.value);
+  }
+  /**
+   * establece un cambio de texto para la contraseña del Usuario en el registro
+   * @param   {string} e  nueva contraseña para el Usuario en el registro
+   */
+  const cambiarTextoPassRegistro = (e) => {
+    setTextPassRegistro(e.target.value);
+  }
+  /**
+   * establece un cambio de texto para la fecha del Usuario
+   * @param   {string} e  nueva fecha para el Usuario
+   */
+  const cambiarTextoFecha = (e) => {
+    setTextFecha(e.target.value);
+  }
+  /**
+   * establece un cambio de texto para la descripción del Usuario
+   * @param   {string} e  nueva descripción para el Usuario
+   */
+  const cambiarTextoDescripcion = (e) => {
+    setTextDescripcion(e.target.value);
+  }
+
+  /**
+   * cierra la caja de modificar sesión
+   */
+  const cerrar_registrar = () => {
+    props.setAbierto(false)
+  }
+
+  /**
+   * establece el modificados de sesión si todos los datos han sido correctos y validados mediante las expresiones regulares
+   */
+  const ir_iniciarSesion = () => {
+    let fecha = new Date();
+    let anio = fecha.getFullYear();
+    let fechaUser = textFecha.substr(0,4)
+    let edadUsuario = anio-fechaUser;
+    if(expresionUsuario.test(textUserRegistro)){
+      if(expresionCorreo.test(textCorreo)){
+        if(expresionPass.test(textPassRegistro)){
+          if(edadUsuario>13 &amp;&amp; edadUsuario &lt;= 120){
+            if(expresionDescripcion.test(textDescripcion)){
+              cerrar_registrar();
+              alert("Modificado correctamente")
+            }else{
+              setValidacionRegistro(false);
+              setErrorRegistro("Escribe al menos un carácter y menos de 300.")
+            }
+            
+          }else{
+            setValidacionRegistro(false);
+          setErrorRegistro("Fecha incorrecta, comprueba que hayas puesto una fecha de nacimiento válida y además, ser mayor de 13 años.")
+          }
+          
+        }else{
+          setValidacionRegistro(false);
+          setErrorRegistro("Contraseña incorrecta, necesitas tener entre 8 a 16 caracteres, al menos un dígito, mayúscula y minúscula.")
+        }
+      }else{
+        setValidacionRegistro(false);
+        setErrorRegistro("Correo electronico incorrecto, necesitas tener un patrón correcto, como: usuario@gmail.com")
+      }
+    }else{
+      setValidacionRegistro(false);
+      setErrorRegistro("Usuario incorrecto")
+    }
+    
+  }
+
+  return (
+    &lt;div>
+    {
+      props.abierto==true &amp;&amp; &lt;div>
+        &lt;div className="fondo" onClick={cerrar_registrar}>&lt;/div>
+        &lt;form className="registrar">
+            &lt;a href="#" onClick={cerrar_registrar}>&lt;img className="registrar__cerrar" src={Cerrar}/>&lt;/a>
+            &lt;tittle className="registrar__titulo">Modificar&lt;/tittle>
+            &lt;section className="registrar__caja">
+            &lt;div className={validacionRegistro ? 'registrar__caja__informativo1' : "registrar__caja__informativo1--visible"} >{errorRegistro}&lt;/div>
+                &lt;input className="registrar__caja__elemento" onChange={cambiarTextoUsuarioRegistro} value={textUserRegistro} type="text" placeholder="Usuario..."/>
+                &lt;input className="registrar__caja__elemento" onChange={cambiarTextoCorreo} value={textCorreo} type="email" placeholder="Correo electrónico..."/> 
+                &lt;input className="registrar__caja__elemento" onChange={cambiarTextoPassRegistro} value={textPassRegistro} type="password" placeholder="Contraseña..."/> 
+                &lt;input className="registrar__caja__elemento" onChange={cambiarTextoFecha} value={textFecha} type="date"/>
+                &lt;input className="registrar__caja__elemento" onChange={cambiarTextoDescripcion} value={textDescripcion} type="text" placeholder="Descripción..."/>
+            &lt;/section>
+            &lt;section className="registrar__boton">
+                &lt;a className="registrar__boton__opcion registrar__boton__opcion--registrar" onClick={ir_iniciarSesion}>Guardar&lt;/a>
+
+            &lt;/section>
+        &lt;/form>
+      &lt;/div>
+    }
+
+    
+    &lt;/div>
+    
+    
+
+
+  );    
+}
+
+export default Modificar;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="Caja_habilidad.html">Caja_habilidad</a></li><li><a href="Caja_movimiento.html">Caja_movimiento</a></li><li><a href="Caja_pokemon.html">Caja_pokemon</a></li><li><a href="Contacto.html">Contacto</a></li><li><a href="Encabezado.html">Encabezado</a></li><li><a href="Filtro.html">Filtro</a></li><li><a href="Habilidad.html">Habilidad</a></li><li><a href="Iniciar.html">Iniciar</a></li><li><a href="Inicio.html">Inicio</a></li><li><a href="Listado_habilidad.html">Listado_habilidad</a></li><li><a href="Listado_movimiento.html">Listado_movimiento</a></li><li><a href="Listado_pokemon.html">Listado_pokemon</a></li><li><a href="Modificar.html">Modificar</a></li><li><a href="Movimiento.html">Movimiento</a></li><li><a href="Nada_encontrado.html">Nada_encontrado</a></li><li><a href="Pagina404.html">Pagina404</a></li><li><a href="Paginado.html">Paginado</a></li><li><a href="Perfil.html">Perfil</a></li><li><a href="Pie.html">Pie</a></li><li><a href="Pokemon.html">Pokemon</a></li><li><a href="root.html">root</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Jan 17 2023 01:35:24 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

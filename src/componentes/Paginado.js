@@ -1,8 +1,28 @@
 import React from 'react';
 import '../hojas-de-estilo/componentes/Paginado.sass';
+/**
+ * Componente que representa el paginado de cada página de la lista de búsqueda
+ *
+ * @component
+ * @example
 
+ * return (
+ * const paginaAct = function => ()
+ * const paginaAnterior = function => ()
+ * const paginaSiguiente = function => ()
+ * const paginaFinal = function => ()
+ * const ident = function => ()
+ *   <Paginado paginaAct={paginaAct} paginaAnterior={paginaAnterior} paginaSiguiente={paginaSiguiente} paginaFinal={paginaFinal}/>
+ * )
+ */
 function Paginado({ paginaAct, paginaAnterior, paginaSiguiente, paginaFinal, ident }) {
+  /**
+  * variable que identifica si se encuentra en un primer extremo
+  */
   let noExtremo1 = true;
+  /**
+  * variable que identifica si se encuentra en un segundo extremo
+  */
   let noExtremo2 = true;
   if(paginaAct == 1){
     noExtremo1 = false;

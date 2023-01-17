@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: sesion/Iniciar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: sesion/Iniciar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState, useEffect} from 'react';
+import '../../hojas-de-estilo/sesion/Iniciar.sass';
+import '../../hojas-de-estilo/sesion/Registrar.sass';
+import '../../hojas-de-estilo/sesion/AccesoPerfil.sass';
+import Cerrar from "../../images/icons/cerrar.svg";
+import Avatar from "../../images/icons/avatar.png";
+/**
+ * Componente que representa iniciar sesión, registrar sesión y la caja para acceder al perfil
+ *
+ * @component
+ * @example
+ * const props.activado = true
+ * const props.setActivado(false) = function => props.activado=false 
+ * const props.activado2 = true
+ * const props.setActivado2(false) = function => props.activado2=false 
+ * const props.activado = true
+ * const props.setActivado3(false) = function => props.activado3=false 
+ * const props.sesionActivada = true
+ * const props.setsesionActivada(false) = function => props.sesionActivada=false 
+ * return (
+ *   &lt;Iniciar />
+ * )
+ */
+function Iniciar(props) {
+  /**
+  * Expresión Regular del nombre del Usuario
+  */
+  const expresionUsuario = /^[a-zA-Z]((\.|_|-)?[a-zA-Z0-9]+){3}$/
+  /**
+  * Expresión Regular de la contraseña Usuario
+  */
+  const expresionPass = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
+  /**
+  * Expresión Regular del correo del Usuario
+  */
+  const expresionCorreo = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
+  const [error, setError] = useState(null)
+  const [errorRegistro, setErrorRegistro] = useState(null)
+  const [validacion, setValidacion] = useState(true)
+  const [validacionRegistro, setValidacionRegistro] = useState(true)
+  const [check, setCheck] = useState(false)
+  const [textUser, setTextUser] = useState(localStorage.getItem("usuario"))
+  const [textPass, setTextPass] = useState(localStorage.getItem("pass"))
+  const [textCorreo, setTextCorreo] = useState("")
+  const [textFecha, setTextFecha] = useState("")
+  const [textUserRegistro, setTextUserRegistro] = useState("")
+  const [textPassRegistro, setTextPassRegistro] = useState("")
+  /**
+   * establece un cambio de texto para el nombre del Usuario
+   * @param   {string} e  nuevo nombre para el nombre del Usuario
+   */
+  const cambiarTextoUsuario = (e) => {
+    setTextUser(e.target.value);
+  }
+  /**
+   * establece un cambio de texto para la contraseña del Usuario
+   * @param   {string} e  nueva contraseña para el Usuario
+   */
+  const cambiarTextoPass = (e) => {
+    setTextPass(e.target.value);
+  }
+  /**
+   * establece un cambio de texto para el correo del Usuario
+   * @param   {string} e  nuevo correo para el Usuario
+   */
+  const cambiarTextoCorreo = (e) => {
+    setTextCorreo(e.target.value);
+  }
+  /**
+   * establece un cambio de texto para el nombre del Usuario en el registro
+   * @param   {string} e  nuevo nombre para el Usuario en el registro
+   */
+  const cambiarTextoUsuarioRegistro = (e) => {
+    setTextUserRegistro(e.target.value);
+  }
+  /**
+   * establece un cambio de texto para la contraseña del Usuario en el registro
+   * @param   {string} e  nueva contraseña para el Usuario en el registro
+   */
+  const cambiarTextoPassRegistro = (e) => {
+    setTextPassRegistro(e.target.value);
+  }
+  /**
+   * establece un cambio de texto para la fecha del Usuario
+   * @param   {string} e  nueva fecha para el Usuario
+   */
+  const cambiarTextoFecha = (e) => {
+    setTextFecha(e.target.value);
+  }
+  /**
+   * establece un cambio de check para recordar los datos del usuario en iniciar sesión
+   * @param   {string} e  nuevo check para recordar los datos de iniciar sesión
+   */
+  const cambiarCheck = (e) => {
+    setCheck(e.target.checked);
+  }
+  /**
+   * cierra la caja de iniciar sesión
+   */
+  const cerrar_iniciar = () => {
+    props.setActivado(false);
+  }
+  /**
+   * abre la caja de iniciar sesión
+   */
+  const abrir_iniciar = () => {
+    props.setActivado(true);
+  }
+  /**
+   * cierra la caja de registrar sesión
+   */
+  const cerrar_registrar = () => {
+    props.setActivado2(false);
+  }
+  /**
+   * abre la caja de registrar sesión
+   */
+  const abrir_registrar = () => {
+    props.setActivado2(true);
+  }
+  /**
+   * cierra la caja de perfil de usuaruio
+   */
+  const cerrar_perfil = () => {
+    props.setActivado3(false);
+  }
+  /**
+   * abre la caja de perfil de usuaruio
+   */
+  const abrir_perfil = () => {
+    props.setActivado3(true);
+    console.log("perfil abierto")
+    localStorage.setItem("conexion",true)
+  }
+  /**
+   * cierra la sesión del usuario, mandando false en conexión para la localStorage
+   */
+  const cerrar_sesion = () => {
+    localStorage.setItem("conexion",false)
+  }
+  /**
+   * establece el inicio de sesión si todos los datos han sido correctos y validados mediante las expresiones regulares
+   */
+  const iniciarSesion = () => {
+    if(expresionUsuario.test(textUser)){
+      if(expresionPass.test(textPass)){
+        abrir_perfil();
+        cerrar_iniciar();
+        if(check){
+          localStorage.setItem("usuario",textUser)
+          localStorage.setItem("pass", textPass)
+        }
+        
+        
+      }else{
+        setValidacion(false);
+        setError("Contraseña incorrecta, necesitas tener entre 8 a 16 caracteres, al menos un dígito, mayúscula y minúscula.")
+      }  
+    }   
+    else{
+      setValidacion(false);
+      setError("Usuario incorrecto")
+    }
+  }
+  /**
+   * función que llama a abrir_registrar y cerrar_sesion
+   */
+  const registrarSesion = () => {
+    abrir_registrar();
+    cerrar_iniciar();
+  }
+  /**
+   * establece el registro de sesión si todos los datos han sido correctos y validados mediante las expresiones regulares
+   */
+  const ir_iniciarSesion = () => {
+    let fecha = new Date();
+    let anio = fecha.getFullYear();
+    let fechaUser = textFecha.substr(0,4)
+    let edadUsuario = anio-fechaUser;
+    if(expresionUsuario.test(textUserRegistro)){
+      if(expresionCorreo.test(textCorreo)){
+        if(expresionPass.test(textPassRegistro)){
+          if(edadUsuario>13 &amp;&amp; edadUsuario &lt;= 120){
+            abrir_iniciar();
+            cerrar_registrar();
+            alert("Registrado correctamente")
+          }else{
+            setValidacionRegistro(false);
+          setErrorRegistro("Fecha incorrecta, comprueba que hayas puesto una fecha de nacimiento válida y además, ser mayor de 13 años.")
+          }
+          
+        }else{
+          setValidacionRegistro(false);
+          setErrorRegistro("Contraseña incorrecta, necesitas tener entre 8 a 16 caracteres, al menos un dígito, mayúscula y minúscula.")
+        }
+      }else{
+        setValidacionRegistro(false);
+        setErrorRegistro("Correo electronico incorrecto, necesitas tener un patrón correcto, como: usuario@gmail.com")
+      }
+    }else{
+      setValidacionRegistro(false);
+      setErrorRegistro("Usuario incorrecto")
+    }
+    
+  }
+  /**
+   * función que llama a abrir_iniciar y cerrar_registrar
+   */
+  const ir_iniciarSesion2 = () => {   
+    abrir_iniciar();
+    cerrar_registrar();
+  }
+  return (
+    &lt;div>
+    {
+      props.activado==true &amp;&amp; 
+      &lt;div>
+      &lt;div class="fondo" onClick={cerrar_iniciar}>&lt;/div>
+       &lt;form className="iniciar_sesion">
+      &lt;a href="#" onClick={cerrar_iniciar}>&lt;img className="iniciar_sesion__cerrar" src={Cerrar}/>&lt;/a>
+      &lt;tittle className="iniciar_sesion__titulo">Iniciar sesión&lt;/tittle>
+      
+      &lt;section className="iniciar_sesion__caja">
+          &lt;div className={validacion ? 'iniciar_sesion__caja__informativo1' : "iniciar_sesion__caja__informativo1--visible"} >{error}&lt;/div>
+          &lt;input className="iniciar_sesion__caja__elemento" onChange={cambiarTextoUsuario} value={textUser} type="text" placeholder="Usuario..."/> 
+          &lt;input className="iniciar_sesion__caja__elemento" onChange={cambiarTextoPass} value={textPass} type="password" placeholder="Contraseña..."/> 
+          &lt;label className="iniciar_sesion__caja__recordar">&lt;input onChange={cambiarCheck} type="checkbox" id="check" value="check" checked={check}/> Recordar Cuenta&lt;/label>
+      &lt;/section>
+      &lt;section className="iniciar_sesion__boton">
+          &lt;a className="iniciar_sesion__boton__opcion iniciar_sesion__boton__opcion--entrar" onClick={iniciarSesion}>Entrar&lt;/a>
+          &lt;p>o&lt;/p>
+          &lt;a className="iniciar_sesion__boton__opcion iniciar_sesion__boton__opcion--registrar" onClick={registrarSesion}>Regístrate&lt;/a>
+      &lt;/section>
+  &lt;/form>
+  &lt;/div>
+    }
+
+    {
+      props.activado2==true &amp;&amp; &lt;div>
+        &lt;div className="fondo" onClick={cerrar_registrar}>&lt;/div>
+        &lt;form className="registrar">
+            &lt;a href="#" onClick={cerrar_registrar}>&lt;img className="registrar__cerrar" src={Cerrar}/>&lt;/a>
+            &lt;tittle className="registrar__titulo">Registrar&lt;/tittle>
+            &lt;section className="registrar__caja">
+            &lt;div className={validacionRegistro ? 'registrar__caja__informativo1' : "registrar__caja__informativo1--visible"} >{errorRegistro}&lt;/div>
+                &lt;input className="registrar__caja__elemento" onChange={cambiarTextoUsuarioRegistro} value={textUserRegistro} type="text" placeholder="Usuario..."/>
+                &lt;input className="registrar__caja__elemento" onChange={cambiarTextoCorreo} value={textCorreo} type="email" placeholder="Correo electrónico..."/> 
+                &lt;input className="registrar__caja__elemento" onChange={cambiarTextoPassRegistro} value={textPassRegistro} type="password" placeholder="Contraseña..."/> 
+                &lt;input className="registrar__caja__elemento" onChange={cambiarTextoFecha} value={textFecha} type="date"/>
+            &lt;/section>
+            &lt;section className="registrar__boton">
+                &lt;a className="registrar__boton__opcion registrar__boton__opcion--registrar" onClick={ir_iniciarSesion}>Registrar&lt;/a>
+                &lt;p>o&lt;/p>
+                &lt;input type="submit" value="Identíficate aquí" className="registrar__boton__opcion registrar__boton__opcion--iniciar" onClick={ir_iniciarSesion2}/>
+            &lt;/section>
+        &lt;/form>
+      &lt;/div>
+    }
+
+    {
+      props.activado3==true &amp;&amp; &lt;div>
+        &lt;div className="fondo" onClick={cerrar_perfil}>&lt;/div>
+        &lt;div className="perfil">
+            &lt;a href="#" onClick={cerrar_perfil}>&lt;img className="perfil__cerrar" src={Cerrar}/>&lt;/a>
+            &lt;tittle className="perfil__titulo">Perfil&lt;/tittle>
+            &lt;section className="perfil__avatar">
+                &lt;img className="perfil__avatar__imagen" src={Avatar}/>
+            &lt;/section>
+            &lt;form className="perfil__boton">
+                &lt;a href="/perfil" className="perfil__boton__opcion">Acceder al perfil&lt;/a>
+                &lt;a href="/" onClick={cerrar_sesion} className="perfil__boton__opcion">Cerrar sesión&lt;/a>
+            &lt;/form>
+        &lt;/div>
+      &lt;/div>
+    }
+    &lt;/div>
+    
+    
+
+
+  );    
+}
+
+export default Iniciar;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Encabezado.html">Encabezado</a></li><li><a href="Iniciar.html">Iniciar</a></li><li><a href="Pie.html">Pie</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Mon Jan 16 2023 20:30:30 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

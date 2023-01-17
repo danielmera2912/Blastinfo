@@ -6,8 +6,24 @@ import {useLocation} from 'react-router-dom';
 import { Routes, Link } from "react-router-dom";
 import { Redirect } from 'react-router-dom';
 
-function Encabezado({paginaActual }) {
+
+/**
+ * Componente que representa el encabezado de la página web
+ *
+ * @component
+ * @example
+ * return (
+ *   <Encabezado/>
+ * )
+ */
+function Encabezado({ }) {
+  /**
+  * name Location
+  */
   const { pathname, hash, key } = useLocation();
+  /**
+  * boolean que dependerá de si tiene portada o no
+  */
   let portada;
   if(pathname == "/"){
     portada = false;
@@ -26,9 +42,9 @@ function Encabezado({paginaActual }) {
       }
         <nav className="encabezado__navegador">
             <ul className="encabezado__lista">
-                <li><Link to="/listado_pokemon" state={{ url: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1600",  identidad:"todo"}} className="encabezado__lista__enlace">Pokémon</Link></li>
-                <li><Link to="/listado_movimiento" state={{ url: "https://pokeapi.co/api/v2/move?offset=0&limit=1200",  identidad:"movimiento"}} className="encabezado__lista__enlace">Movimientos</Link></li>
-                <li><Link to="/listado_habilidad" state={{ url: "https://pokeapi.co/api/v2/ability?offset=0&limit=500",  identidad:"habilidad"}} className="encabezado__lista__enlace">Habilidades</Link></li>
+                <li><Link to="/listado_pokemon" state={{ url: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1500",  identidad:"todo"}} className={pathname=="/listado_pokemon" ? 'encabezado__lista__enlace--actual' : 'encabezado__lista__enlace'} >Pokémon</Link></li>
+                <li><Link to="/listado_movimiento" state={{ url: "https://pokeapi.co/api/v2/move?offset=0&limit=1200",  identidad:"movimiento"}} className={pathname=="/listado_movimiento" ? 'encabezado__lista__enlace--actual' : 'encabezado__lista__enlace'}>Movimientos</Link></li>
+                <li><Link to="/listado_habilidad" state={{ url: "https://pokeapi.co/api/v2/ability?offset=0&limit=500",  identidad:"habilidad"}} className={pathname=="/listado_habilidad" ? 'encabezado__lista__enlace--actual' : 'encabezado__lista__enlace'}>Habilidades</Link></li>
             </ul>
         </nav>
         {portada==true && 

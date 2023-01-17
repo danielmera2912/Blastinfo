@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: componentes/Pokemon.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: componentes/Pokemon.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState, useEffect} from 'react';
+import { useLocation } from 'react-router-dom'
+import '../hojas-de-estilo/componentes/Pokemon.sass';
+import bug from "../images/Tipos/bug.png";
+import dark from "../images/Tipos/dark.png";
+import dragon from "../images/Tipos/dragon.png";
+import electric from "../images/Tipos/electric.png";
+import fairy from "../images/Tipos/fairy.png";
+import fighting from "../images/Tipos/fighting.png";
+import fire from "../images/Tipos/fire.png";
+import flying from "../images/Tipos/flying.png";
+import ghost from "../images/Tipos/ghost.png";
+import grass from "../images/Tipos/grass.png";
+import ground from "../images/Tipos/ground.png";
+import ice from "../images/Tipos/ice.png";
+import normal from "../images/Tipos/normal.png";
+import poison from "../images/Tipos/poison.png";
+import psychic from "../images/Tipos/psychic.png";
+import rock from "../images/Tipos/rock.png";
+import steel from "../images/Tipos/steel.png";
+import water from "../images/Tipos/water.png";
+/**
+ * Componente que representa el Pokémon
+ *
+ * @component
+ * @example
+ * return (
+ *   &lt;Pokemon nombreNuevo={nombreNuevo}/>
+ * )
+ */
+function Pokemon() {
+    /**
+     * name Location
+     */
+    const location = useLocation()
+    /**
+     * nombre del Pokémon
+     */
+    const { name } = location.state;
+    /**
+     * nombre del Pokémon limpio, con la primera letra en mayúscula
+     */
+    let nombre_nuevo=name;
+    if(nombre_nuevo!=null){
+        nombre_nuevo = nombre_nuevo.charAt(0).toUpperCase() + nombre_nuevo.slice(1);
+    }
+    /**
+     * url de la API llamando al Pokemon deseado
+     */
+    const url = "https://pokeapi.co/api/v2/pokemon/"+name;
+    const [pokemon, setPokemon] = useState(null)
+     /**
+     * useEffect provoca la llamada de obtenerDatos cada vez que se reinicia la página
+     */
+    useEffect(() => {
+        obtenerDatos();
+      }, [])
+    /**
+     * obtenerDatos guarda el array de los Pokémon con los resultados de la API
+     */
+    const obtenerDatos =  async () => {
+      const data = await fetch(url);
+      const pokemon= await data.json();
+      setPokemon(pokemon);
+      
+    }
+
+
+    
+    
+   
+  return (
+    
+    &lt;main className="cuerpo cuerpo--articulo">     
+      {
+        pokemon!=null &amp;&amp;
+            &lt;div className="cuerpo--articulo__contenedor">
+
+                &lt;section className="cuerpo--articulo__titulo">
+                    {nombre_nuevo}
+                &lt;/section>
+
+                &lt;section className="cuerpo--articulo__avatar">
+                    &lt;img className="cuerpo--articulo__avatar__imagen" src={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"+pokemon.id+".png"}/>
+                &lt;/section>
+
+                &lt;section className="cuerpo--articulo__sprites">
+                        &lt;img className="cuerpo--articulo__sprites__imagen" src={pokemon.sprites.front_default}/>
+                        &lt;img className="cuerpo--articulo__sprites__imagen" src={pokemon.sprites.back_default}/>
+                &lt;/section>
+                &lt;section className="cuerpo--articulo__movimientos">
+                    &lt;div className="cuerpo--articulo__movimientos__titulo">Movimientos&lt;/div>
+                    &lt;div className="cuerpo--articulo__movimientos__movimiento1">
+                    {
+                    pokemon.moves[0]!= null &amp;&amp; pokemon.moves[0].move.name.length>0 &amp;&amp; &lt;div className="cuerpo--articulo__movimientos__movimiento1__elementosNombre">{pokemon.moves[0].move.name}&lt;/div>
+                }
+                {
+                    pokemon.moves[1]!= null &amp;&amp; pokemon.moves[1].move.name.length>0 &amp;&amp; &lt;div className="cuerpo--articulo__movimientos__movimiento1__elementosNombre">{pokemon.moves[1].move.name}&lt;/div>
+                }
+                {
+                    pokemon.moves[2]!= null &amp;&amp; pokemon.moves[2].move.name.length>0 &amp;&amp; &lt;div className="cuerpo--articulo__movimientos__movimiento1__elementosNombre">{pokemon.moves[2].move.name}&lt;/div>
+                }
+                {
+                    pokemon.moves[3]!= null &amp;&amp; pokemon.moves[3].move.name.length>0 &amp;&amp; &lt;div className="cuerpo--articulo__movimientos__movimiento1__elementosNombre">{pokemon.moves[3].move.name}&lt;/div>
+                }
+                   
+                    &lt;/div>
+                &lt;/section>
+                
+                
+
+                            
+
+                    
+
+                &lt;section className="cuerpo--articulo__extraInfo">
+ 
+                            &lt;div className="cuerpo--articulo__extraInfo__habilidad">
+                        &lt;div className="cuerpo--articulo__extraInfo__habilidad__titulo">Habilidades&lt;/div>
+                        &lt;div className="cuerpo--articulo__extraInfo__habilidad__datos">
+                            {
+                                pokemon.abilities[0]!= null &amp;&amp; pokemon.abilities[0].ability.name.length>0 &amp;&amp; &lt;div className="cuerpo--articulo__extraInfo__habilidad__datos__habilidad1">{pokemon.abilities[0].ability.name}&lt;/div>
+                            }
+                            {
+                                pokemon.abilities[1]!= null &amp;&amp; pokemon.abilities[1].ability.name.length>0 &amp;&amp; &lt;div className="cuerpo--articulo__extraInfo__habilidad__datos__habilidad1">{pokemon.abilities[1].ability.name}&lt;/div>
+                            }
+                            {
+                                pokemon.abilities[2]!= null &amp;&amp; pokemon.abilities[2].ability.name.length>0 &amp;&amp; &lt;div className="cuerpo--articulo__extraInfo__habilidad__datos__habilidad1">{pokemon.abilities[2].ability.name}&lt;/div>
+                            }
+                            {
+                                pokemon.abilities[3]!= null &amp;&amp; pokemon.abilities[3].ability.name.length>0 &amp;&amp; &lt;div className="cuerpo--articulo__extraInfo__habilidad__datos__habilidad1">{pokemon.abilities[3].ability.name}&lt;/div>
+                            }
+                        &lt;/div>
+                    &lt;/div>
+
+                    
+
+
+                    &lt;div className="cuerpo--articulo__extraInfo__tipo">
+                        &lt;div className="cuerpo--articulo__extraInfo__tipo__titulo">Tipo &lt;/div>
+                        &lt;div className="cuerpo--articulo__extraInfo__tipo__contenido">
+                            {
+                                pokemon.types[0].type.name=="bug" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={bug}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="dark" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={dark}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="dragon" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={dragon}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="electric" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={electric}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="fairy" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={fairy}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="fighting" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={fighting}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="fire" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={fire}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="flying" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={flying}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="ghost" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={ghost}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="grass" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={grass}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="ground" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={ground}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="ice" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={ice}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="normal" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={normal}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="poison" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={poison}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="psychic" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={psychic}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="rock" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={rock}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="steel" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={steel}/>
+                            }
+                            {
+                                pokemon.types[0].type.name=="water" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={water}/>
+                            }
+                            
+
+
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="bug" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={bug}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="dark" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={dark}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="dragon" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={dragon}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="electric" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={electric}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="fairy" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={fairy}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="fighting" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={fighting}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="fire" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={fire}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="flying" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={flying}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="ghost" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={ghost}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="grass" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={grass}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="ground" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={ground}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="ice" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={ice}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="normal" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={normal}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="poison" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={poison}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="psychic" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={psychic}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="rock" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={rock}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="steel" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={steel}/>
+                            }
+                            {
+                                pokemon.types[1]!= null &amp;&amp; pokemon.types[1].type.name.length>0 &amp;&amp; pokemon.types[1].type.name=="water" &amp;&amp; &lt;img className="cuerpo--articulo__extraInfo__tipo__contenido__imagen" src={water}/>
+                            }
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/section>
+            &lt;/div>
+            }
+        &lt;/main>
+    
+
+  );    
+}
+
+export default Pokemon;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="Caja_habilidad.html">Caja_habilidad</a></li><li><a href="Caja_movimiento.html">Caja_movimiento</a></li><li><a href="Caja_pokemon.html">Caja_pokemon</a></li><li><a href="Contacto.html">Contacto</a></li><li><a href="Encabezado.html">Encabezado</a></li><li><a href="Filtro.html">Filtro</a></li><li><a href="Habilidad.html">Habilidad</a></li><li><a href="Iniciar.html">Iniciar</a></li><li><a href="Inicio.html">Inicio</a></li><li><a href="Listado_habilidad.html">Listado_habilidad</a></li><li><a href="Listado_movimiento.html">Listado_movimiento</a></li><li><a href="Listado_pokemon.html">Listado_pokemon</a></li><li><a href="Modificar.html">Modificar</a></li><li><a href="Movimiento.html">Movimiento</a></li><li><a href="Nada_encontrado.html">Nada_encontrado</a></li><li><a href="Pagina404.html">Pagina404</a></li><li><a href="Paginado.html">Paginado</a></li><li><a href="Perfil.html">Perfil</a></li><li><a href="Pie.html">Pie</a></li><li><a href="Pokemon.html">Pokemon</a></li><li><a href="root.html">root</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Jan 17 2023 01:35:24 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

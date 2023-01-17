@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: componentes/Listado_pokemon.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: componentes/Listado_pokemon.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, {useState, useEffect} from 'react';
+import { useLocation } from 'react-router-dom'
+import Caja_pokemon from './Caja_pokemon';
+import Nada_encontrado from './Nada_encontrado';
+import Filtro from './Filtro';
+import Paginado from './Paginado';
+/**
+ * Componente que representa la lista de Pokémon
+ *
+ * @component
+ * @example
+ * return (
+ *   &lt;Listado_pokemon/>
+ * )
+ */
+const Listado_pokemon = () => {
+    const [filtro, setFiltro] = useState('id_descendente');
+     /**
+     * name Location
+     */
+    const location = useLocation()
+    const [pokemons, setPokemons] = useState(null)
+     /**
+     * elemento buscar, identifica si llega a este componente desde la barra buscadora o desde el encabezado
+     */
+    let { buscar } = location.state;
+    if(buscar != null){
+      buscar = buscar.toLowerCase();
+    }
+    /**
+     * elemento contador que impide que se recargue varias veces una proyección de lista, para evitar ralentizaciones
+     */
+    let recuerdaFiltro = 0;
+    const [paginaActual, setPaginaActual] = useState(1);
+    const [paginaFinal, setPaginaFinal] = useState(true);
+    /**
+     * useEffect provoca la llamada de obtenerDatos cada vez que se reinicia la página, o detecte un cambio en el componente filtro
+     * o los Pokémon
+     */
+    useEffect(() => {
+      obtenerDatos();
+    }, [pokemons, filtro])
+    /**
+     * url de la API llamando a todos los Pokémon
+     */
+    const url = "https://pokeapi.co/api/v2/pokemon?offset=0&amp;limit=1500";
+    /**
+     * la identidad identifica de que tipo es el elemento
+     */
+    const { identidad } = location.state;
+    /**
+     * obtenerDatos guarda el array de los Pokémon con los resultados de la API
+     */
+    const obtenerDatos =  async () => {
+      const data = await fetch(url);
+      const pokemons= await data.json();
+      setPokemons(pokemons);
+      
+    }
+    /**
+     * cambia el valor del cambiarPaginaActual para cambiar el número de página del paginado
+     * @param   {int} num  se mandará un número para cambiar el número del paginado
+     */
+    const cambiarPaginaActual = (num) => {
+      
+      setPaginaActual(paginaActual+num);
+  }
+    /**
+     * paginaAnterior retrocede una página en caso de que sea diferente de 1
+     */
+    const paginaAnterior = () => {
+      if(paginaActual!=1){
+        cambiarPaginaActual(-1);
+      }
+    }
+    /**
+     * paginaSiguiente avanza una página en caso de que no sea el número total de pokemon dividido entre 8, que es lo que forma la última página
+     */
+    const paginaSiguiente = () => {
+      
+      if(pokemons!= null &amp;&amp; paginaActual&lt;pokemons.count/8){
+        cambiarPaginaActual(+1);
+      }else{
+        setPaginaFinal(false);
+      }
+      
+    }
+    /**
+     * elemento para identificar si encuentra contenido según la búsqueda del usuario a través del componente buscador
+     */
+    let hayContenido;
+    if(identidad=="pokemon"){
+      if(pokemons!=null){
+        if([...pokemons.results.filter(function(item) { return item.name === buscar; })].length==0){
+          hayContenido = false;
+        }
+      }
+      
+    }
+    return(
+      
+    &lt;main className="cuerpo cuerpo--listado">
+      &lt;Filtro setFiltro={setFiltro}/>
+      &lt;section className="cuerpo__listado">
+      {
+        identidad=="pokemon" &amp;&amp; pokemons != null &amp;&amp; pokemons.results.length > 0 &amp;&amp; [...pokemons.results.filter(function(item) { return item.name === buscar; })].splice((paginaActual-1)*8,8).map(item => {
+          return( 
+            
+            &lt;Caja_pokemon key={item.name} name={item.name} front={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+item.url.split('/')[item.url.split('/').length-2]+".png"} back={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/"+item.url.split('/')[item.url.split('/').length-2]+".png"}/>
+        )}) 
+      }
+      {
+        identidad=="todo" &amp;&amp; filtro=="id_ascendente" &amp;&amp; pokemons != null &amp;&amp; pokemons.results.length > 0 &amp;&amp; [...pokemons.results].reverse().splice((paginaActual-1)*8,8).map(item => {
+          return( 
+            &lt;Caja_pokemon key={item.name} name={item.name} front={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+item.url.split('/')[item.url.split('/').length-2]+".png"} back={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/"+item.url.split('/')[item.url.split('/').length-2]+".png"}/>
+        )}) 
+      }
+      {
+        identidad=="todo" &amp;&amp; filtro=="id_descendente" &amp;&amp; pokemons != null &amp;&amp; pokemons.results.length > 0 &amp;&amp; [...pokemons.results].splice((paginaActual-1)*8,8).map(item => {
+          return( 
+            &lt;Caja_pokemon key={item.name} name={item.name} front={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+item.url.split('/')[item.url.split('/').length-2]+".png"} back={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/"+item.url.split('/')[item.url.split('/').length-2]+".png"}/>
+        )}) 
+      }
+       {
+        identidad=="pokemon" &amp;&amp; buscar.length&lt;1 &amp;&amp; filtro=="id_descendente" &amp;&amp; pokemons != null &amp;&amp; pokemons.results.length > 0 &amp;&amp; [...pokemons.results].splice((paginaActual-1)*8,8).map(item => {
+          return( 
+            &lt;Caja_pokemon key={item.name} name={item.name} front={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+item.url.split('/')[item.url.split('/').length-2]+".png"} back={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/"+item.url.split('/')[item.url.split('/').length-2]+".png"}/>
+        )}) 
+      }
+      {
+        identidad=="pokemon" &amp;&amp; hayContenido==false &amp;&amp; buscar.length>=1 &amp;&amp; &lt;Nada_encontrado/> 
+      }
+    
+      {
+        pokemons != null &amp;&amp; recuerdaFiltro==0 &amp;&amp; filtro=="nombre_descendente" &amp;&amp; identidad=="todo" &amp;&amp; pokemons.results.length > 0 &amp;&amp; 
+        [...pokemons.results].sort((a, b) => {
+          const nameA = a.name.toUpperCase();
+          const nameB = b.name.toUpperCase(); 
+          recuerdaFiltro++;
+          if (nameA &lt; nameB) {
+            return -1;
+          }
+          if (nameA > nameB) {
+            return 1;
+          }
+          return 0;
+        }).splice((paginaActual-1)*8,8).map(item => {
+          return( 
+            &lt;Caja_pokemon key={item.name} name={item.name} front={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+item.url.split('/')[item.url.split('/').length-2]+".png"} back={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/"+item.url.split('/')[item.url.split('/').length-2]+".png"}/>
+        )}) 
+      }
+
+      {
+        pokemons != null &amp;&amp; recuerdaFiltro==0 &amp;&amp; filtro=="nombre_ascendente" &amp;&amp; identidad=="todo" &amp;&amp; pokemons.results.length > 0 &amp;&amp; 
+        [...pokemons.results].sort((a, b) => {
+          const nameA = a.name.toUpperCase();
+          const nameB = b.name.toUpperCase(); 
+          recuerdaFiltro++;
+          if (nameA > nameB) {
+            return -1;
+          }
+          if (nameA &lt; nameB) {
+            return 1;
+          }
+          return 0;
+        }).splice((paginaActual-1)*8,8).map(item => {
+          return( 
+            &lt;Caja_pokemon key={item.name} name={item.name} front={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+item.url.split('/')[item.url.split('/').length-2]+".png"} back={"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/"+item.url.split('/')[item.url.split('/').length-2]+".png"}/>
+        )}) 
+      }
+
+      &lt;/section>
+      &lt;Paginado paginaAct={paginaActual} paginaAnterior={paginaAnterior} paginaSiguiente={paginaSiguiente} paginaFinal={paginaFinal} ident={identidad}/>
+    &lt;/main>
+    )
+  };
+
+export default Listado_pokemon;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="App.html">App</a></li><li><a href="Caja_habilidad.html">Caja_habilidad</a></li><li><a href="Caja_movimiento.html">Caja_movimiento</a></li><li><a href="Caja_pokemon.html">Caja_pokemon</a></li><li><a href="Contacto.html">Contacto</a></li><li><a href="Encabezado.html">Encabezado</a></li><li><a href="Filtro.html">Filtro</a></li><li><a href="Habilidad.html">Habilidad</a></li><li><a href="Iniciar.html">Iniciar</a></li><li><a href="Inicio.html">Inicio</a></li><li><a href="Listado_habilidad.html">Listado_habilidad</a></li><li><a href="Listado_movimiento.html">Listado_movimiento</a></li><li><a href="Listado_pokemon.html">Listado_pokemon</a></li><li><a href="Modificar.html">Modificar</a></li><li><a href="Movimiento.html">Movimiento</a></li><li><a href="Nada_encontrado.html">Nada_encontrado</a></li><li><a href="Pagina404.html">Pagina404</a></li><li><a href="Paginado.html">Paginado</a></li><li><a href="Perfil.html">Perfil</a></li><li><a href="Pie.html">Pie</a></li><li><a href="Pokemon.html">Pokemon</a></li><li><a href="root.html">root</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Jan 17 2023 01:35:24 GMT+0100 (hora estándar de Europa central)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

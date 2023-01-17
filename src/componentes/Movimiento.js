@@ -19,30 +19,54 @@ import psychic from "../images/Tipos/psychic.png";
 import rock from "../images/Tipos/rock.png";
 import steel from "../images/Tipos/steel.png";
 import water from "../images/Tipos/water.png";
-
-
 import fisico from "../images/Movimientos/Tipo_fisico.gif";
 import especial from "../images/Movimientos/Tipo_especial.gif";
 import estado from "../images/Movimientos/Tipo_estado.gif";
-
+/**
+ * Componente que representa el movimiento
+ *
+ * @component
+ * @example
+ * return (
+ *   <Movimiento nombreNuevo={nombreNuevo}/>
+ * )
+ */
 function Movimiento() {
-    const location = useLocation()
-    const { name } = location.state;
-    let nombre_nuevo=name;
-    if(nombre_nuevo!=null){
-        nombre_nuevo = nombre_nuevo.charAt(0).toUpperCase() + nombre_nuevo.slice(1);
-    }
-    const url = "https://pokeapi.co/api/v2/move/"+name;
-    const [movimiento, setMovimiento] = useState(null)
-    useEffect(() => {
-        obtenerDatos();
-      }, [])
-    const obtenerDatos =  async () => {
-      const data = await fetch(url);
-      const movimiento= await data.json();
-      setMovimiento(movimiento);
-      
-    }
+  /**
+   * name Location
+   */
+  const location = useLocation()
+  /**
+   * nombre del movimiento
+   */
+  const { name } = location.state;
+  /**
+   * nombre del movimiento limpio, con la primera letra en mayúscula
+   */
+  let nombre_nuevo=name;
+  if(nombre_nuevo!=null){
+      nombre_nuevo = nombre_nuevo.charAt(0).toUpperCase() + nombre_nuevo.slice(1);
+  }
+  /**
+   * url de la API llamando al movimiento deseado
+   */
+  const url = "https://pokeapi.co/api/v2/move/"+name;
+  const [movimiento, setMovimiento] = useState(null)
+  /**
+   * useEffect provoca la llamada de obtenerDatos cada vez que se reinicia la página
+   */
+  useEffect(() => {
+      obtenerDatos();
+    }, [])
+  /**
+   * obtenerDatos guarda el array de los movimientos con los resultados de la API
+   */
+  const obtenerDatos =  async () => {
+    const data = await fetch(url);
+    const movimiento= await data.json();
+    setMovimiento(movimiento);
+    
+  }
 
 
     

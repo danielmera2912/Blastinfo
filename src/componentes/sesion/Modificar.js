@@ -1,44 +1,93 @@
 import React, {useState, useEffect} from 'react';
 import '../../hojas-de-estilo/sesion/Registrar.sass';
 import Cerrar from "../../images/icons/cerrar.svg";
+/**
+ * Componente que representa modificar perfil del perfil
+ *
+ * @component
+ * @example
+ * const props.abierto = true
+ * const props.setAbierto(false) = function => props.abierto=false 
+ * const props.nombreUser = "Juan"
+ * const props.correoUser = "juan@gmail.com"
+ * const props.fechaUser = "2010-10-10"
+ * const props.descripcionUser = "me gusta pokemon"
+ * return (
+ *   <Modificar nombreUser={nombreUser} correoUser={correoUser} fechaUser={fechaUser} descripcionUser={descripcionUser} />
+ * )
+ */
 
 function Modificar(props) {
-  
+  /**
+  * Expresión Regular del nombre del Usuario
+  */
   const expresionUsuario = /^[a-zA-Z]+$/
+  /**
+  * Expresión Regular de la contraseña Usuario
+  */
   const expresionPass = /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/
+  /**
+  * Expresión Regular del correo del Usuario
+  */
   const expresionCorreo = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
-  const expresionDescripcion = /^[\s\S]{1,25}$/
+  /**
+  * Expresión Regular de la descripción del Usuario
+  */
+  const expresionDescripcion = /^[\s\S]{1,300}$/
   const [errorRegistro, setErrorRegistro] = useState(null)
   const [validacionRegistro, setValidacionRegistro] = useState(true)
-  const [textCorreo, setTextCorreo] = useState("")
-  const [textFecha, setTextFecha] = useState("")
-  const [textDescripcion, setTextDescripcion] = useState("")
-  const [textUserRegistro, setTextUserRegistro] = useState("")
-  const [textPassRegistro, setTextPassRegistro] = useState("")
+  const [textCorreo, setTextCorreo] = useState(props.correoUser)
+  const [textFecha, setTextFecha] = useState(props.fechaUser)
+  const [textDescripcion, setTextDescripcion] = useState(props.descripcionUser)
+  const [textUserRegistro, setTextUserRegistro] = useState(props.nombreUser)
+  const [textPassRegistro, setTextPassRegistro] = useState("Ee98499304")
 
-
+  /**
+   * establece un cambio de texto para el correo del Usuario
+   * @param   {string} e  nuevo correo para el Usuario
+   */
   const cambiarTextoCorreo = (e) => {
     setTextCorreo(e.target.value);
   }
+  /**
+   * establece un cambio de texto para el nombre del Usuario en el registro
+   * @param   {string} e  nuevo nombre para el Usuario en el registro
+   */
   const cambiarTextoUsuarioRegistro = (e) => {
     setTextUserRegistro(e.target.value);
   }
+  /**
+   * establece un cambio de texto para la contraseña del Usuario en el registro
+   * @param   {string} e  nueva contraseña para el Usuario en el registro
+   */
   const cambiarTextoPassRegistro = (e) => {
     setTextPassRegistro(e.target.value);
   }
+  /**
+   * establece un cambio de texto para la fecha del Usuario
+   * @param   {string} e  nueva fecha para el Usuario
+   */
   const cambiarTextoFecha = (e) => {
     setTextFecha(e.target.value);
   }
+  /**
+   * establece un cambio de texto para la descripción del Usuario
+   * @param   {string} e  nueva descripción para el Usuario
+   */
   const cambiarTextoDescripcion = (e) => {
     setTextDescripcion(e.target.value);
   }
 
-
+  /**
+   * cierra la caja de modificar sesión
+   */
   const cerrar_registrar = () => {
     props.setAbierto(false)
   }
 
-
+  /**
+   * establece el modificados de sesión si todos los datos han sido correctos y validados mediante las expresiones regulares
+   */
   const ir_iniciarSesion = () => {
     let fecha = new Date();
     let anio = fecha.getFullYear();
@@ -53,7 +102,7 @@ function Modificar(props) {
               alert("Modificado correctamente")
             }else{
               setValidacionRegistro(false);
-              setErrorRegistro("Escribe al menos un carácter y menos de 25.")
+              setErrorRegistro("Escribe al menos un carácter y menos de 300.")
             }
             
           }else{

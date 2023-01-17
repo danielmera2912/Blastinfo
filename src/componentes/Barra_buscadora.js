@@ -17,7 +17,7 @@ function Barra_buscadora({ encabezado }) {
          "listado_pokemon" : location.pathname=="/listado_movimiento" ?
           "listado_movimiento" : location.pathname=="/listado_habilidad" ?
           "listado_habilidad" : "listado_pokemon" } 
-          state={{ url: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1600", 
+          state={{ url: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1500", 
           identidad:"pokemon", 
           buscar:busqueda}} className={encabezado ? 'buscador-encabezado__boton' : 'buscador__boton'}>
             <img className={encabezado ? 'buscador-encabezado__boton__imagen' : 'buscador__boton__imagen'} src={Buscador}/>

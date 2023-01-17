@@ -1,14 +1,30 @@
 import React, {useState, useEffect} from 'react';
 import '../hojas-de-estilo/componentes/Pagina404.sass';
 import Pokeball from '../images/pokeball.svg';
+
+/**
+ * Componente que representa la página Error 404
+ *
+ * @component
+ * @example
+
+ * return (
+ *   <Error404/>
+ * )
+ */
+
 function Pagina404({  }) {
+  /**
+   * useEffect que cuando ocurra dos segundos tras iniciar la página, se realice un cambio a true al valor del efectoActivado
+   */
   useEffect(() => {
-    const interval = setInterval(() => efecto, 1000);
+    const interval = setInterval(() => {
+      setEfectoActivado(true);
+    }, 2000);
+    return () => clearInterval(interval);
   }, []);
   const [efectoActivado, setEfectoActivado] = useState(false)
-  const efecto = () => {
-    setEfectoActivado(true);
-  }
+
   return (
 
     <main className="cuerpo cuerpo--error">

@@ -12,7 +12,15 @@ import Perfil from './componentes/Perfil';
 import Pokemon from './componentes/Pokemon';
 import Movimiento from './componentes/Movimiento';
 import Habilidad from './componentes/Habilidad';
-
+/**
+ * Componente que representa la APP, contiene el encabezado, rutas, y pie.
+ *
+ * @component
+ * @example
+ * return (
+ *   <App/>
+ * )
+ */
 function App() {
   return (
     <div className="App">
@@ -26,7 +34,7 @@ function App() {
             <Route path="/listado_habilidad" element={<Listado_habilidad/>}/>
             <Route path="/contacto" element={<Contacto/>}/>
             <Route path="/perfil" element={<Perfil/>}/>
-            <Route path="/error404" element={<Pagina404/>}/>
+            <Route path="*" element={<Pagina404/>}/>
             <Route path="/pokemon" element={<Pokemon/>}/>
             <Route path="/movimiento" element={<Movimiento/>}/>
             <Route path="/habilidad" element={<Habilidad/>}/>
