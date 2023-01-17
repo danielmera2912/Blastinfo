@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/static/css/main.488c812f.css",
+    "main.js": "/static/js/main.dcbc6dfe.js",
+    "static/media/fondo3.png": "/static/media/fondo3.feb144225e60f22873e5.png",
+    "static/media/logo.svg": "/static/media/logo.475c111c9faaf06b6eaba23e935f5972.svg",
+    "static/media/psychic.png": "/static/media/psychic.91706aebb0443e374ee6.png",
+    "static/media/dragon.png": "/static/media/dragon.fdf0c72137da6d0875d1.png",
+    "static/media/rock.png": "/static/media/rock.3012aad9c5438d06c545.png",
+    "static/media/flying.png": "/static/media/flying.e326302b249140807c1a.png",
+    "static/media/water.png": "/static/media/water.3442676ef9202e509132.png",
+    "static/media/electric.png": "/static/media/electric.dc4a8c3026ae3ff4e39d.png",
+    "static/media/normal.png": "/static/media/normal.d092f56d66e22ec53eba.png",
+    "static/media/dark.png": "/static/media/dark.4ae3730e34e6621be076.png",
+    "static/media/ghost.png": "/static/media/ghost.e4d33c26060dfeff79ec.png",
+    "static/media/bug.png": "/static/media/bug.5a1d4223cc7a1396bf8c.png",
+    "static/media/ground.png": "/static/media/ground.3b525f8d0787a744e072.png",
+    "static/media/steel.png": "/static/media/steel.54b3edd95c2dd818b9d5.png",
+    "static/media/fire.png": "/static/media/fire.c265e12357cbe2d94f79.png",
+    "static/media/poison.png": "/static/media/poison.980ff82da6c1fee77ee7.png",
+    "static/media/grass.png": "/static/media/grass.5c924897eb57b821e84d.png",
+    "static/media/fighting.png": "/static/media/fighting.3251257e0f78744d6490.png",
+    "static/media/fairy.png": "/static/media/fairy.0be7bbcf13ecfd092cca.png",
+    "static/media/ice.png": "/static/media/ice.2aa72c2375b6fe4764e1.png",
+    "static/media/avatar.png": "/static/media/avatar.37eeeab32b349c4ed1be.png",
+    "static/media/cerrar.svg": "/static/media/cerrar.d497d39d85bea07f52b4d0eec8413b36.svg",
+    "static/media/pokeball.svg": "/static/media/pokeball.2db7de44dd9ea6558c0113d7d9e3db9d.svg",
+    "index.html": "/index.html",
+    "main.488c812f.css.map": "/static/css/main.488c812f.css.map",
+    "main.dcbc6dfe.js.map": "/static/js/main.dcbc6dfe.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.488c812f.css",
+    "static/js/main.dcbc6dfe.js"
+  ]
+}
