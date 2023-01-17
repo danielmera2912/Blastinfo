@@ -28,7 +28,7 @@ function App() {
         <Encabezado/>
       
         <Routes>
-            <Route path="/blastinfo" element={<Inicio/>}/>
+            <Route path="/blastinfo/" element={<Inicio/>}/>
             <Route path="/blastinfo/listado_pokemon" element={<Listado_pokemon/>}/>
             <Route path="/blastinfo/listado_movimiento" element={<Listado_movimiento/>}/>
             <Route path="/blastinfo/listado_habilidad" element={<Listado_habilidad/>}/>

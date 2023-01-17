@@ -268,7 +268,7 @@ function Iniciar(props) {
             </section>
             <form className="perfil__boton">
                 <a href="/blastinfo/perfil" className="perfil__boton__opcion">Acceder al perfil</a>
-                <a href="/blastinfo" onClick={cerrar_sesion} className="perfil__boton__opcion">Cerrar sesión</a>
+                <a href="/blastinfo/" onClick={cerrar_sesion} className="perfil__boton__opcion">Cerrar sesión</a>
             </form>
         </div>
       </div>

@@ -25,7 +25,7 @@ function Encabezado({ }) {
   * boolean que dependerá de si tiene portada o no
   */
   let portada;
-  if(pathname == "/blastinfo"){
+  if(pathname == "/blastinfo/"){
     portada = false;
     
   }else{
@@ -36,7 +36,7 @@ function Encabezado({ }) {
     
     <header className={portada ? 'encabezado encabezado--normal' : 'encabezado encabezado--portada'}>
       {portada==true && 
-        <a href="/blastinfo">
+        <a href="/blastinfo/">
             <img className="encabezado__lista__logo" src= {Logo}/>
         </a>
       }

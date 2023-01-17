@@ -13,7 +13,7 @@ function Barra_buscadora({ encabezado }) {
   return (
     <form className={encabezado ? 'buscador-encabezado' : 'buscador'}>
         <input className={encabezado ? 'buscador-encabezado__caja' : 'buscador__caja'} onChange={cambiarTexto} value={busqueda} type="text" placeholder="Buscar..."/> 
-        <Link to={location.pathname=="/blastinfo" ? "/blastinfo/listado_pokemon" : location.pathname=="/blastinfo/listado_pokemon" ?
+        <Link to={location.pathname=="/blastinfo/" ? "/blastinfo/listado_pokemon" : location.pathname=="/blastinfo/listado_pokemon" ?
          "/blastinfo/listado_pokemon" : location.pathname=="/blastinfo/listado_movimiento" ?
           "/blastinfo/listado_movimiento" : location.pathname=="/blastinfo/listado_habilidad" ?
           "/blastinfo/listado_habilidad" : "/blastinfo/listado_pokemon" } 
