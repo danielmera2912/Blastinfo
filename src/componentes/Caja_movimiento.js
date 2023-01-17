@@ -41,7 +41,7 @@ function Caja_movimiento({ name }) {
     
   return (
 
-    <Link to="/movimiento" state={{name:name}}>
+    <Link to="/blastinfo/movimiento" state={{name:name}}>
         <article className="cuerpo__listado--movimiento__items">
             <div className="cuerpo__listado--movimiento__items__nombre">
                 {nombre_nuevo}

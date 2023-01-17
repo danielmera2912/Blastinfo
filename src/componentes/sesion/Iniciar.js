@@ -267,8 +267,8 @@ function Iniciar(props) {
                 <img className="perfil__avatar__imagen" src={Avatar}/>
             </section>
             <form className="perfil__boton">
-                <a href="/perfil" className="perfil__boton__opcion">Acceder al perfil</a>
-                <a href="/" onClick={cerrar_sesion} className="perfil__boton__opcion">Cerrar sesión</a>
+                <a href="/blastinfo/perfil" className="perfil__boton__opcion">Acceder al perfil</a>
+                <a href="/blastinfo" onClick={cerrar_sesion} className="perfil__boton__opcion">Cerrar sesión</a>
             </form>
         </div>
       </div>

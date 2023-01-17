@@ -44,7 +44,7 @@ function Caja_pokemon({ name, front, back }) {
     
   return (
     
-    <Link to="/pokemon" state={{name:name}}>
+    <Link to="/blastinfo/pokemon" state={{name:name}}>
         <article className="cuerpo__listado__items">
             <div className="cuerpo__listado__items__imagenes">
                 <img className="cuerpo__listado__items__imagenes__imagen" src={front}/>
