@@ -25,7 +25,7 @@ function Encabezado({ }) {
   * boolean que dependerá de si tiene portada o no
   */
   let portada;
-  if(pathname == "/blastinfo/"){
+  if(pathname == "/"){
     portada = false;
     
   }else{
@@ -36,15 +36,15 @@ function Encabezado({ }) {
     
     <header className={portada ? 'encabezado encabezado--normal' : 'encabezado encabezado--portada'}>
       {portada==true && 
-        <a href="/blastinfo/">
+        <Link to="/">
             <img className="encabezado__lista__logo" src= {Logo}/>
-        </a>
+        </Link>
       }
         <nav className="encabezado__navegador">
             <ul className="encabezado__lista">
-                <li><Link to="/blastinfo/listado_pokemon" state={{ url: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1500",  identidad:"todo"}} className={pathname=="/blastinfo/listado_pokemon" ? 'encabezado__lista__enlace--actual' : 'encabezado__lista__enlace'} >Pokémon</Link></li>
-                <li><Link to="/blastinfo/listado_movimiento" state={{ url: "https://pokeapi.co/api/v2/move?offset=0&limit=1200",  identidad:"movimiento"}} className={pathname=="/blastinfo/listado_movimiento" ? 'encabezado__lista__enlace--actual' : 'encabezado__lista__enlace'}>Movimientos</Link></li>
-                <li><Link to="/blastinfo/listado_habilidad" state={{ url: "https://pokeapi.co/api/v2/ability?offset=0&limit=500",  identidad:"habilidad"}} className={pathname=="/blastinfo/listado_habilidad" ? 'encabezado__lista__enlace--actual' : 'encabezado__lista__enlace'}>Habilidades</Link></li>
+                <li><Link to="/listado_pokemon" state={{ url: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1500",  identidad:"todo"}} className={pathname=="/listado_pokemon" ? 'encabezado__lista__enlace--actual' : 'encabezado__lista__enlace'} >Pokémon</Link></li>
+                <li><Link to="/listado_movimiento" state={{ url: "https://pokeapi.co/api/v2/move?offset=0&limit=1200",  identidad:"movimiento"}} className={pathname=="/listado_movimiento" ? 'encabezado__lista__enlace--actual' : 'encabezado__lista__enlace'}>Movimientos</Link></li>
+                <li><Link to="/listado_habilidad" state={{ url: "https://pokeapi.co/api/v2/ability?offset=0&limit=500",  identidad:"habilidad"}} className={pathname=="/listado_habilidad" ? 'encabezado__lista__enlace--actual' : 'encabezado__lista__enlace'}>Habilidades</Link></li>
             </ul>
         </nav>
         {portada==true && 

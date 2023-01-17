@@ -13,10 +13,10 @@ function Barra_buscadora({ encabezado }) {
   return (
     <form className={encabezado ? 'buscador-encabezado' : 'buscador'}>
         <input className={encabezado ? 'buscador-encabezado__caja' : 'buscador__caja'} onChange={cambiarTexto} value={busqueda} type="text" placeholder="Buscar..."/> 
-        <Link to={location.pathname=="/blastinfo/" ? "/blastinfo/listado_pokemon" : location.pathname=="/blastinfo/listado_pokemon" ?
-         "/blastinfo/listado_pokemon" : location.pathname=="/blastinfo/listado_movimiento" ?
-          "/blastinfo/listado_movimiento" : location.pathname=="/blastinfo/listado_habilidad" ?
-          "/blastinfo/listado_habilidad" : "/blastinfo/listado_pokemon" } 
+        <Link to={location.pathname=="/" ? "listado_pokemon" : location.pathname=="/listado_pokemon" ?
+         "listado_pokemon" : location.pathname=="/listado_movimiento" ?
+          "listado_movimiento" : location.pathname=="/listado_habilidad" ?
+          "listado_habilidad" : "listado_pokemon" } 
           state={{ url: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=1500", 
           identidad:"pokemon", 
           buscar:busqueda}} className={encabezado ? 'buscador-encabezado__boton' : 'buscador__boton'}>

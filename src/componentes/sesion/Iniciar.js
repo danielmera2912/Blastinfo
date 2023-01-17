@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { Routes, Link } from "react-router-dom";
 import '../../hojas-de-estilo/sesion/Iniciar.sass';
 import '../../hojas-de-estilo/sesion/Registrar.sass';
 import '../../hojas-de-estilo/sesion/AccesoPerfil.sass';
@@ -267,8 +268,8 @@ function Iniciar(props) {
                 <img className="perfil__avatar__imagen" src={Avatar}/>
             </section>
             <form className="perfil__boton">
-                <a href="/blastinfo/perfil" className="perfil__boton__opcion">Acceder al perfil</a>
-                <a href="/blastinfo/" onClick={cerrar_sesion} className="perfil__boton__opcion">Cerrar sesión</a>
+                <Link to="/perfil" className="perfil__boton__opcion">Acceder al perfil</Link>
+                <a href="/" onClick={cerrar_sesion} className="perfil__boton__opcion">Cerrar sesión</a>
             </form>
         </div>
       </div>

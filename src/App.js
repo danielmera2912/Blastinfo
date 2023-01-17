@@ -28,19 +28,20 @@ function App() {
         <Encabezado/>
       
         <Routes>
-            <Route path="/blastinfo/" element={<Inicio/>}/>
-            <Route path="/blastinfo/listado_pokemon" element={<Listado_pokemon/>}/>
-            <Route path="/blastinfo/listado_movimiento" element={<Listado_movimiento/>}/>
-            <Route path="/blastinfo/listado_habilidad" element={<Listado_habilidad/>}/>
-            <Route path="/blastinfo/contacto" element={<Contacto/>}/>
-            <Route path="/blastinfo/perfil" element={<Perfil/>}/>
+            <Route path="/" element={<Inicio/>}/>
+            <Route path="/listado_pokemon" element={<Listado_pokemon/>}/>
+            <Route path="/listado_movimiento" element={<Listado_movimiento/>}/>
+            <Route path="/listado_habilidad" element={<Listado_habilidad/>}/>
+            <Route path="/contacto" element={<Contacto/>}/>
+            <Route path="/perfil" element={<Perfil/>}/>
             <Route path="*" element={<Pagina404/>}/>
-            <Route path="/blastinfo/pokemon" element={<Pokemon/>}/>
-            <Route path="/blastinfo/movimiento" element={<Movimiento/>}/>
-            <Route path="/blastinfo/habilidad" element={<Habilidad/>}/>
+            <Route path="/pokemon" element={<Pokemon/>}/>
+            <Route path="/movimiento" element={<Movimiento/>}/>
+            <Route path="/habilidad" element={<Habilidad/>}/>
         </Routes>
+        <Pie/>
       </Router>
-      <Pie/>
+      
     </div>
   );
 }

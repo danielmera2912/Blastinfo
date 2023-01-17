@@ -4,6 +4,7 @@ import Twitter from '../../images/Redes/twitter-5-48.png';
 import Facebook from '../../images/Redes/facebook-5-48.png';
 import Instagram from '../../images/Redes/instagram-48.png';
 import Iniciar from '../sesion/Iniciar';
+import { Routes, Link } from "react-router-dom";
 
 /**
  * Componente que representa el pie de la página web
@@ -60,22 +61,22 @@ function Pie({  }) {
     <div className="pie">
         <ul className="pie__seccion pie__seccion--redes">
             <li>
-                <a className="pie__seccion__redes" href="/blastinfo/error404">
+                <Link className="pie__seccion__redes" to="error404">
                     <img onMouseEnter={() => usarZoom(true)}
                             onMouseLeave={() => usarZoom(false)} src={Twitter} className={zoom ? 'pie__seccion__redes-img_encima' : 'pie__seccion__redes'} alt='Logo de Twitter'/>
-                </a>
+                </Link>
             </li>
             <li>
-                <a className="pie__seccion__redes" href="/blastinfo/error404">
+                <Link className="pie__seccion__redes" to="error404">
                     <img onMouseEnter={() => usarZoom(true)}
                             onMouseLeave={() => usarZoom(false)} src={Facebook} className={zoom ? 'pie__seccion__redes-img_encima' : 'pie__seccion__redes'} alt='Logo de Facebook'/>
-                </a>
+                </Link>
             </li>
             <li>
-                <a className="pie__seccion__redes" href="/blastinfo/error404">
+                <Link className="pie__seccion__redes" to="error404">
                     <img onMouseEnter={() => usarZoom(true)}
                             onMouseLeave={() => usarZoom(false)} src={Instagram} className={zoom ? 'pie__seccion__redes-img_encima' : 'pie__seccion__redes'} alt='Logo de Instagram'/>
-                </a>
+                </Link>
             </li>
         </ul>
           
@@ -83,7 +84,7 @@ function Pie({  }) {
                 <p className="leader"> <a onClick={mostrarSesion} className="pie__acceder__enlace">Cuenta de Usuario</a></p>
         </section>
         <section className="pie__contacto">
-            <p className="leader"> <a href="/blastinfo/contacto" className="pie__contacto__enlace">Contacto</a></p>
+            <p className="leader"> <Link to="/contacto" className="pie__contacto__enlace">Contacto</Link></p>
         </section>
         <Iniciar activado={activado} setActivado={setActivado}
          activado2={activado2} setActivado2={setActivado2} 

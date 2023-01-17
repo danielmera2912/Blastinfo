@@ -1,6 +1,5 @@
 {
   "name": "blastinfo",
-  "homepage": "https://danielmera2912.github.io/blastinfo/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
